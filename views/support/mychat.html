@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Web-Chat</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+  .navbar-right {
+    float: right!important;
+    margin-right: 0px;
+}
+					 #custom-search-input {
+  background: #e8e6e7 none repeat scroll 0 0;
+  margin: 0;
+  padding: 10px;
+}
+   #custom-search-input .search-query {
+   background: #fff none repeat scroll 0 0 !important;
+   border-radius: 4px;
+   height: 33px;
+   margin-bottom: 0;
+   padding-left: 7px;
+   padding-right: 7px;
+   }
+   #custom-search-input button {
+   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+   border: 0 none;
+   border-radius: 3px;
+   color: #666666;
+   left: auto;
+   margin-bottom: 0;
+   margin-top: 7px;
+   padding: 2px 5px;
+   position: absolute;
+   right: 0;
+   z-index: 9999;
+   }
+   .search-query:focus + button {
+   z-index: 3;   
+   }
+   .all_conversation button {
+   background: #f5f3f3 none repeat scroll 0 0;
+   border: 1px solid #dddddd;
+   height: 38px;
+   text-align: left;
+   width: 100%;
+   }
+   .all_conversation i {
+   background: #e9e7e8 none repeat scroll 0 0;
+   border-radius: 100px;
+   color: #636363;
+   font-size: 17px;
+   height: 30px;
+   line-height: 30px;
+   text-align: center;
+   width: 30px;
+   }
+   .all_conversation .caret {
+   bottom: 0;
+   margin: auto;
+   position: absolute;
+   right: 15px;
+   top: 0;
+   }
+   .all_conversation .dropdown-menu {
+   background: #f5f3f3 none repeat scroll 0 0;
+   border-radius: 0;
+   margin-top: 0;
+   padding: 0;
+   width: 100%;
+   }
+   .all_conversation ul li {
+   border-bottom: 1px solid #dddddd;
+   line-height: normal;
+   width: 100%;
+   }
+   .all_conversation ul li a:hover {
+   background: #dddddd none repeat scroll 0 0;
+   color:#333;
+   }
+   .all_conversation ul li a {
+  color: #333;
+  line-height: 30px;
+  padding: 3px 20px;
+}
+   .member_list .chat-body {
+   margin-left: 47px;
+   margin-top: 0;
+   }
+   .top_nav {
+   overflow: visible;
+   }
+   .member_list .contact_sec {
+   margin-top: 3px;
+   }
+   .member_list li {
+   padding: 6px;
+   }
+   .member_list ul {
+   border: 1px solid #dddddd;
+   }
+   .chat-img img {
+   height: 34px;
+   width: 34px;
+   }
+   .member_list li {
+   border-bottom: 1px solid #dddddd;
+   padding: 6px;
+   }
+   .member_list li:last-child {
+   border-bottom:none;
+   }
+   .member_list {
+   height: 414px;
+   overflow-x: hidden;
+   overflow-y: auto;
+   border: 1px solid #c1c1c1;
+   }
+   .member_list_right {
+   height: 466px !important;
+   overflow-x: hidden;
+   overflow-y: auto;
+   border: 1px solid #c1c1c1;
+   }
+   .sub_menu_ {
+  background: #e8e6e7 none repeat scroll 0 0;
+  left: 100%;
+  max-width: 233px;
+  position: absolute;
+  width: 100%;
+}
+.sub_menu_ {
+  background: #f5f3f3 none repeat scroll 0 0;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  display: none;
+  left: 100%;
+  margin-left: 0;
+  max-width: 233px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.all_conversation ul li:hover .sub_menu_ {
+  display: block;
+}
+.new_message_head button {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+}
+.new_message_head {
+  background: #f5f3f3 none repeat scroll 0 0;
+  float: left;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 18px 10px;
+  width: 100%;
+}
+.message_section {
+  border: 1px solid #dddddd;
+}
+.chat_area {
+  float: left;
+  height: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+}
+.chat_area li {
+  padding: 14px 14px 0;
+}
+.chat_area li .chat-img1 img {
+  height: 40px;
+  width: 40px;
+}
+.chat_area .chat-body1 {
+  margin-left: 50px;
+}
+.chat-body1 p {
+  background: #fbf9fa none repeat scroll 0 0;
+  padding: 10px;
+}
+.chat_area .admin_chat .chat-body1 {
+  margin-left: 0;
+  margin-right: 50px;
+}
+.chat_area li:last-child {
+  padding-bottom: 10px;
+}
+.message_write {
+  background: #f5f3f3 none repeat scroll 0 0;
+  float: left;
+  padding: 15px;
+  width: 100%;
+}
+
+.message_write textarea.form-control {
+  height: 70px;
+  padding: 10px;
+}
+.chat_bottom {
+  float: left;
+  margin-top: 13px;
+  width: 100%;
+}
+.upload_btn {
+  color: #777777;
+}
+.sub_menu_ > li a, .sub_menu_ > li {
+  float: left;
+  width:100%;
+}
+.member_list li:hover {
+  background: #428bca none repeat scroll 0 0;
+  color: #fff;
+  cursor:pointer;
+}
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><img style="width:153px;" src="images/hawkscode-logo.png"></a>
+    </div>
+    <ul>
+    	<li><p class="navbar-text navbar-right">Welcome To WebChat</p></li>
+    </ul>
+  </div>
+</nav>
+	<!-- navbar-end -->
+<div class="main_section">
+   <div class="container">
+      <div class="chat_container">
+         <div class="col-sm-3 chat_sidebar">
+       <div class="row">
+            <div id="custom-search-input">
+               <div class="input-group col-md-12">
+                  <input type="text" class="  search-query form-control" placeholder="Conversation" />
+                  <button class="btn btn-danger" type="button">
+                  <span class=" glyphicon glyphicon-search"></span>
+                  </button>
+               </div>
+            </div>
+            <div class="dropdown all_conversation">
+               <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="fa fa-weixin" aria-hidden="true"></i>
+               All Conversations
+               </button>
+            </div>
+            <div class="member_list">
+               <ul class="list-unstyled">
+
+                <% if(coversation)
+                   {
+                    console.log(coversation);
+                    for(var i=0; i < coversation.length; i++)
+                    {
+
+                   
+
+     
+                  
+                %>
+             
+                  <a href="/SupportChat/<%= coversation[i].array._id %>" id="convo_<%= coversation[i].array._id %>" <% if((coversation[i].count) == 0)  { %>  style="color:#777" <%  } %>>
+     <% 
+
+     if((coversation[i].array._id)==convoData)
+                    {
+                      console.log("yes");
+%> 
+                    <li class="left clearfix"  style="background-color: #337ab7;color:#fff"> 
+               <% 
+                    }
+                    else
+                    {
+
+                          %>
+                            <li class="left clearfix" > 
+                     <%  
+                     } 
+                     %> 
+                     <span class="chat-img pull-left">
+                     <img src="/users/<%= data[i].image %>" alt="User Avatar" class="img-circle">
+                     </span>
+                     <div class="chat-body clearfix">
+                        <div class="header_sec">
+                           <strong class="primary-font"><%= data[i].name %> </strong> <strong class="pull-right">
+                           </strong>
+                        </div>
+                        <div class="contact_sec">
+                           <strong class="primary-font" id="convo_text<%= coversation[i].array._id %>" ><%= coversation[i].array.lastData[0].text_message %></strong> <span class="badge pull-right count_class">
+
+                            <%= coversation[i].count %>
+
+
+                         </span>
+                        </div>
+                     </div>
+                  </li></a>
+
+                  <% 
+                  
+                  }
+                 }
+                    
+                %>
+                  
+               </ul>
+            </div></div>
+         </div>
+         <!--chat_sidebar-->
+     
+     
+         <div class="col-sm-6 message_section">
+     <div class="row">
+     <div class="new_message_head">
+     <div class="pull-left"><button><i class="fa fa-plus-square-o" aria-hidden="true"></i> <%= userdata.name %></button></div><div class="pull-right"><div class="dropdown">
+  <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fa fa-cogs" aria-hidden="true"></i>  Setting
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Profile</a></li>
+    <li><a href="#">Logout</a></li>
+  </ul>
+</div></div>
+     </div><!--new_message_head-->
+     
+     <div class="chat_area">
+     <ul class="list-unstyled newone">
+
+
+     <% 
+
+     if(chat)
+     {
+      for(var i = 0; i < chat.length; i++) {
+     var now = (chat[i].date).toLocaleString(); 
+        now  = now.split("GMT");
+      if((chat[i].from_message)=="admin")
+      {
+
+        
+      %>
+     <li class="left clearfix">
+                     <span class="chat-img1 pull-left">
+                     <img src="/Admin.png" alt="User Avatar" class="img-circle">
+                     </span>
+                     <div class="chat-body1 clearfix">
+                        <p> <%= chat[i].text_message %></p>
+            <div class="chat_time pull-right"><%= now[0] %></div>
+                     </div>
+                  </li>
+               <% 
+      }
+      else
+      {
+        %>
+          <li class="left clearfix admin_chat">
+                     <span class="chat-img1 pull-right">
+                     <img src="/users/<%= userdata.image %>" alt="User Avatar" class="img-circle">
+                     </span>
+                     <div class="chat-body1 clearfix">
+                        <p><%= chat[i].text_message %></p>
+            <div class="chat_time pull-left"><%= now[0] %></div>
+                     </div>
+                  </li>
+                 
+          
+        
+     
+      <%
+     }
+     }
+     } %>
+     </ul>
+     </div><!--chat_area-->
+          <div class="message_write">
+       <textarea class="form-control" id="message" placeholder="type a message"></textarea>
+     <div class="clearfix"></div>
+     <div class="chat_bottom"><!--<a href="#" class="pull-left upload_btn"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
+ Add Files</a>-->
+ <a  class="pull-right btn btn-success sendmessage" data-user_id="<%= userdata._id %>">
+ Send</a></div>
+     </div>
+     </div>
+         </div> <!--message_section-->
+         <!-- right sidebar -->
+         <div class="col-sm-3 chat_sidebar">
+       <div class="row">
+            <div class="dropdown all_conversation">
+               <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="fa fa-weixin" aria-hidden="true"></i>
+               All Members
+               </button>
+            </div>
+            <div class="member_list member_list_right">
+               <ul class="list-unstyled">
+
+                <% if(data)
+                   {
+                    for(var i=0; i < data.length; i++)
+                    {
+
+                    
+                %>
+                  <li class="left clearfix">
+                     <span class="chat-img pull-left">
+                     <img src="/users/<%= data[i].image %>" alt="User Avatar" class="img-circle">
+                     </span>
+                     <div class="chat-body clearfix">
+                        <div class="header_sec">
+                           <strong class="primary-font"><%= data[i].name %> </strong> <strong class="pull-right">
+                           </strong>
+                        </div>
+                        <!--
+                        <div class="contact_sec">
+                           <strong class="primary-font">(123) 123-456</strong> <span class="badge pull-right">3</span>
+                        </div>-->
+                     </div>
+                  </li>
+
+                  <%
+                  }
+                    }
+                  %>
+                  
+               </ul>
+            </div></div>
+         </div>
+      </div>
+   </div>
+</div>
+	
+</body>
+</html>
+<script>
+$(document).ready(function(){
+  //=====Login Form Request=============================================
+  $(".sendmessage").click(function(){
+    var text  = $("#message").val();
+    var userId = $(this).attr("data-user_id");
+    var d = new Date();
+    if(!text)
+    {
+     alert("Please fill the message first")
+    }
+    else
+    {
+    var chatData ={'userId': userId,'d':d,"textm":text};
+    console.log(chatData);
+    }
+    $.ajax({
+        type : 'POST',
+        url : '/Supportchatinsert',
+        data : chatData,
+        success: function(data){
+           var now2 = d.toLocaleString(); 
+        now2  = now2.split("GMT");
+           var htm ="";
+               htm +='<li class="left clearfix">';
+                     htm +='<span class="chat-img1 pull-left">';
+                     htm +='<img src="/Admin.png" alt="User Avatar" class="img-circle">';
+                     htm +='</span>';
+                    htm +='<div class="chat-body1 clearfix">';
+                        htm +='<p>'+text+'</p>';
+            htm +='<div class="chat_time pull-right">'+now2[0]+'</div>';
+                     htm +='</div>';
+                  htm +='</li>';
+
+                  //document.getElementById('append').innerHTML=htm;
+                  $('.newone').append(htm);
+                  $("#message").val('');
+            
+        }
+      });
+      
+  });
+
+
+// status change
+  var gh ={'convo': "<%= convoData %>"};
+
+
+    $.ajax({
+        type : 'POST',
+        url : '/Change_seen_status',
+        data : gh,
+        success: function(data){
+       
+
+            
+        }
+      });
+
+// fetch data
+
+   setInterval(function()
+   {
+    var chatData ={'d':"gdfg"};
+    $.ajax({
+        type : 'POST',
+        url : '/newMsgSupport',
+        data : chatData,
+        success: function(data){
+          console.log("ajax",data);
+          if(data)
+          {
+
+        for(var i = 0; i < data.length; i++) {
+
+          if((data[i].from_message)=="<%= userdata._id %>")
+          {
+            console.log("yesfound");
+          }
+          else
+          {
+             console.log("yesfound");
+          }
+       
+      if((data[i].from_message)=="<%= userdata._id %>")
+      {
+         var now2 = (data[i].date).toLocaleString(); 
+        now2  = now2.split("GMT");
+           var htm ="";
+               htm +='<li class="left clearfix admin_chat">';
+                     htm +='<span class="chat-img1 pull-right">';
+                     htm +='<img src="/users/<%= userdata.image %>" alt="User Avatar" class="img-circle">';
+                     htm +='</span>';
+                    htm +='<div class="chat-body1 clearfix">';
+                        htm +='<p>'+data[i].text_message+'</p>';
+            htm +='<div class="chat_time pull-right">'+now2[0]+'</div>';
+                     htm +='</div>';
+                  htm +='</li>';
+
+
+    
+                  $('.newone').append(htm);
+                  
+            }
+            else
+            {
+/*
+                    var htm ="";        
+                  htm +='<a href="/SupportChat/_id" id="convo_'+data[i].chat.conversation_id+'">';
+  
+                            htm +='<li class="left clearfix" >'; 
+                    
+                     htm +='<span class="chat-img pull-left">';
+                     htm +='<img src="/users/'+data[0].users.convodataget[0].image+'" alt="User Avatar" class="img-circle">';
+                     htm +='</span>';
+                     htm +='<div class="chat-body clearfix">';
+                    htm +='<div class="header_sec">';
+                   htm +='<strong class="primary-font">'+data[0].users.convodataget[0].name+'</strong> <strong class="pull-right">';
+                           htm +='</strong>';
+                        htm +='</div>';
+                   htm +='<div class="contact_sec">';
+                  htm +='<strong class="primary-font">'+data[i].chat.text_message+'</strong> <span class="badge pull-right count_class">';
+
+                            htm +='1</span>';
+                        htm +='</div>';
+                     htm +='</div>';
+                  htm +='</li></a>';
+                  */
+
+            }
+
+            
+          }
+        }
+        }
+      });
+  },5000);
+
+});
+  
+
+/*
+
+  $(function () {
+    var socket = io();
+    $('form').submit(function(){
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+  });
+*/
+
+</script>

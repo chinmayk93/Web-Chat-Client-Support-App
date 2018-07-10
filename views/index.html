@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Web-Chat</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+	.navbar-right {
+    float: right!important;
+    margin-right: 0px;
+}
+	body{
+		background-image: url(/dark1.jpg);
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+		.log-border{
+			border: 1px solid #d3d6da;
+    		border-top: 10px solid #d3d6da;
+    		border-radius: 16px;
+    		padding: 40px;
+    		border-left: 10px solid #d3d6da;
+    		box-shadow: 4px 5px 24px white;
+			margin-top: 110px;
+		}
+		.form-control {
+    display: block;
+    width: 100%;
+    height: 47px;
+}
+.btn {
+    width: 44%;
+    height: 47px;
+    font-size: 17px;
+    }
+    .btn-primary:hover {
+    color: #fff;
+  background-color: transparent;
+    border-color: #204d74;
+}
+ .btn-primary:active:hover{
+    color: #fff;
+    background-color: transparent;
+    border-color: #122b40;
+}
+.btn-primary {
+    color: #fff;
+    background-color: transparent;
+    border-color: #a45149;
+}
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><img style="width:153px;" src="/hawkscode-logo.png"></a>
+    </div>
+    <ul>
+    	<li><p class="navbar-text navbar-right">Welcome To WebChat</p></li>
+    </ul>
+  </div>
+</nav>
+	<!-- navbar-end -->
+	<div class="container">
+		<div class="col-sm-3 col-md-3 col-lg-3"></div>
+		<div class="col-sm-6 col-md-6 col-lg-6">
+			<div class="log-border">
+				<p class="showerror" align="center" style="color: red;font-size: 20px;display:none">Invalid login detail</p>
+				<div class="form-group">
+				  <input type="text" class="form-control"  id="usr" placeholder="Enter your Username.">
+				</div>
+				<div class="form-group">
+				  <input type="password" class="form-control"  id="pwd" placeholder="enter your Password.">
+				</div>
+				<button type="submit" id="loginForm" class="btn btn-primary center-block">Submit</button>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+<script>
+$(document).ready(function(){
+	//=====Login Form Request=============================================
+	$("#loginForm").click(function(){
+		var uname  = $("#usr").val();
+		var upass = $("#pwd").val();
+		var loginData ={'name': uname,'pass':upass};
+		$.ajax({
+				type : 'POST',
+				url : '/login',
+				data : loginData,
+				success: function(data){
+					console.log(data._id);
+					console.log(data);
+					if(data._id)
+					{
+						window.location.pathname = "/MyChat"
+					}
+					else {
+						$(".showerror").css("display","block");
+					}
+			//	$("#mainDiv").html(data);
+				}
+			});
+	});
+
+	$("#usr,#pwd").keyup(function()
+		{
+				$(".showerror").css("display","none");
+		});
+
+});
+</script>
