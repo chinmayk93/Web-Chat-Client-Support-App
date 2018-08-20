@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 
-var url = "mongodb://hawkscode:test123@ds129801.mlab.com:29801/mychat_hawkscode";
+var url = "mongodb://abc:xyz.mlab.com:29801/mychat_hawkscode";
 
 
 
